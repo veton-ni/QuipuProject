@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QuipuWeb.Dto.ClientDTO>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<div class="card mb-4 address-list">
+    <div class="card-header">
+
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="w-75">Users list</h4>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped table-hover sortable table-clients" >
+                @if (Model.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="10">No Record's found.</td>
+                    </tr>
+                }
+                else
+                {
+                    <thead>
+                        <tr class="">
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Birthdate</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr data-id="@item.id">
+                            <td>@item.name</td>
+                            <td>@item.email</td>
+                            <td>@item.phone</td>
+                            <td>@item.birthdate?.ToString("dd-MM-yyyy")</td>
+                        </tr>
+                        }
+                    </tbody>
+
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/js/index.js"></script>
+    <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+
+}
+
+@section Styles {
+    <link href="//cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css" rel="stylesheet" />
+
+}
+

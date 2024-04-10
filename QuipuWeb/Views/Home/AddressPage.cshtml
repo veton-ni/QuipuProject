@@ -1,0 +1,87 @@
+﻿@using QuipuWeb.Extension
+
+@model QuipuWeb.Dto.AddressDTO
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+<input type="hidden" id="client-id" value="@ViewData["IdClient"]?.ToString()" />
+<input type="hidden" id="address-id" value="@Model?.id" />
+
+
+<div class="container-xl px-4 mt-4">
+    <hr class="mt-0 mb-4">
+    <div class="row">
+
+        <div class="col-xl-10 offset-1">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Address Details</div>
+                <div class="card-body">
+                    <form id="form-address">
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (Full name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputName">Address name</label>
+                                <input class="form-control" id="inputName" name="name" type="text" placeholder="Enter your full address" value="@Model?.name">
+                            </div>
+                            <!-- Form Group (Email address)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPostCode">Post code</label>
+                                <input class="form-control" id="inputPostCode" name="postCode" type="text" placeholder="Enter your post code" value="@Model?.postCode">
+                            </div>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (Address type)-->
+                            <div class="col-md-12">
+                                <label class="small mb-1" for="type">Address type</label>
+
+                                <select id="type" name="type" class="form-control">
+
+                                    @{
+                                        var selected = Model is not null ? Model.type.ToString() : "-1";
+                                        if (selected == "-1")
+                                        {
+                                            <option value="-1" selected>- Select type -</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="-1" >- Select type -</option>
+                                        }
+                                        @foreach (var item in EnumToListExtansion.GetEnumSelectList<Domain.Enums.AddressTypeEnum>())
+                                        {
+                                            Domain.Enums.AddressTypeEnum type = item.Value.ToEnum<Domain.Enums.AddressTypeEnum>();
+                                            if (selected == item.Value)
+                                            {
+                                                <option value="@item.Value" selected>@item.Text</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Value">@item.Text</option>
+                                            }
+                                         }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary btn-save" type="button">@(Model is null ? "New Address" : "Save changes")</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/js/address-page.js"></script>
+}

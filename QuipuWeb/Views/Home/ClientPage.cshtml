@@ -1,0 +1,114 @@
+﻿@model QuipuWeb.Dto.ClientDTO
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<input type="hidden" id="client-id" value="@Model?.id" />
+
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+
+    <nav class="nav nav-borders">
+        @if (Model is not null)
+        {
+            <a class="nav-link active ms-0" href="~/api/Client/@Model?.id/download" target="__blank">Download json</a>
+        }
+        
+    </nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+
+        <div class="col-xl-10 offset-1">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Client Details</div>
+                <div class="card-body">
+                    <form id="form-client">
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (Full name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputName">Full name</label>
+                                <input class="form-control" id="inputName" name="name" type="text" placeholder="Enter your full name" value="@Model?.name">
+                            </div>
+                            <!-- Form Group (Email address)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputEmail">Email address</label>
+                                <input class="form-control" id="inputEmail" name="email" type="email" placeholder="Enter your email address" value="@Model?.email">
+                            </div>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Phone number</label>
+                                <input class="form-control" id="inputPhone" name="phone" type="tel" placeholder="Enter your phone number" value="@Model?.phone">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                <input class="form-control" id="inputBirthday" name="birthdate" type="date" placeholder="Enter your birthday" value="@Model?.birthdate?.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary btn-save" type="button">@(Model is null ? "New Client" : "Save changes")</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mb-4 address-list">
+                <div class="card-header">Address List</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-condensed table-striped table-hover sortable table-address">
+                            @if (Model is null || Model.address.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="10">No Record's found.</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <thead>
+                                    <tr class="">
+                                        <th>Name</th>
+                                        <th>Post Code</th>
+                                        <th>Address type</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model.address)
+                                    {
+                                    <tr  data-id="@item.id">
+                                        <td>@item.name</td>
+                                        <td>@item.postCode</td>
+                                        <td>@item.type</td>
+                                    </tr>
+                                    }
+                                </tbody>
+
+                            }
+                        </table>
+                    </div>
+
+                    @if (Model is not null)
+                    {
+                        <a class="btn btn-primary btn-add-address" asp-controller="Home" asp-action="AddressNew" asp-route-id="@Model.id.ToString()">Add Address</a>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script src="~/js/client-page.js"></script>
+}
