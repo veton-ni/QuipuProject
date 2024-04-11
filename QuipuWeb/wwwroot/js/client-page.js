@@ -1,6 +1,5 @@
 
 $(function () {
-
     $('.table-address').on("click", "tbody tr", function () {
         var id = $(this).data("id");
 
@@ -10,7 +9,6 @@ $(function () {
     $('.address-list').on("click", "btn-add-address", function () {
         window.location.href = "/Home/AddressNew/";
     });
-
 
     $('#form-client').on("click", ".btn-save", function () {
 
@@ -42,8 +40,6 @@ $(function () {
             },
             error: function (error) {
                 
-
-
                 console.log(error.responseJSON.name);
                 Swal.fire({
                     title: "Error!",
@@ -51,9 +47,7 @@ $(function () {
                     icon: "error"
                 });
             }
-            
         });
-
 
     });
 
