@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Clients>
+	<Client >
+		<name>Valerie XML</name>
+		<email>name@example.com</email>
+		<phone>070 123 654</phone>
+		<birthdate>13.12.1989</birthdate>
+		<address type="1">
+			<name>Address 2</name>
+			<postCode>1200</postCode>
+		</address>
+	</Client>
+	<Client >
+		<name>Veton XML</name>
+		<email>veton.nika@email.com</email>
+		<phone>070 000 111</phone>
+		<birthdate>05.06.1991</birthdate>
+		<address type="1">
+			<name>Kumbara 25 xml</name>
+			<postCode>1000</postCode>
+		</address>
+		<address type="2"> 
+			<name>Kumbara 1 xml</name>
+			<postCode>1000</postCode>
+		</address>
+	</Client>
+</Clients>
